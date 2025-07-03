@@ -1,0 +1,200 @@
+@font-face {
+    font-family: 'Arizona';
+    src: url('type/arizona-bold.otf') format('opentype');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Arizona';
+    src: url('type/arizona-regular.otf') format('opentype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Arizona';
+    src: url('type/arizona-medium.otf') format('opentype');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Monument';
+    src: url('type/monument-regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: black;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    color: white;
+    position: relative;
+}
+
+.texture-overlay {
+    position: fixed;
+    top: -50px;
+    left: -50px;
+    width: calc(100% + 100px);
+    height: calc(100% + 100px);
+    background-image: url('bg-texture.svg');
+    background-size: 70%;
+    background-position: center;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0;
+    transition: opacity 1.5s cubic-bezier(.4,0,.2,1);
+}
+
+.texture-overlay.show {
+    opacity: 0.4;
+}
+
+.top-text {
+    text-align: center;
+    padding: 20px;
+    font-size: 1.2rem;
+    position: relative;
+    z-index: 10;
+    font-family: 'Arizona', serif;
+    font-weight: bold;
+    letter-spacing: 0.15em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+.main-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    height: 200px;
+    z-index: 10;
+}
+
+.centered-image {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.centered-image img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+}
+
+.button-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    flex-wrap: nowrap;
+    z-index: 20;
+    width: 100%;
+    padding: 0 20px;
+}
+
+.action-button {
+    width: 120px;
+    padding: 6px;
+    background: rgba(173, 173, 173, 0.50);
+    backdrop-filter: blur(10px);
+    border: none;
+    border-radius: 6px;
+    color: #ffffff;
+    font-size: 0.9rem;
+    letter-spacing: 0.01em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Monument', sans-serif;
+    font-weight: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    flex-shrink: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    filter: blur(20px);
+    opacity: 0;
+    animation: unblur 0.5s ease 0.8s forwards;
+}
+
+
+@keyframes unblur {
+    from {
+        filter: blur(20px);
+        opacity: 0;
+    }
+    to {
+        filter: blur(0px);
+        opacity: 1;
+    }
+}
+
+.action-button:hover {
+    background: rgba(173, 173, 173, 0.70);
+    transition: all 0.3s ease;
+}
+
+.action-button:active {
+    transform: scale(0.96);
+    background: rgba(255, 255, 255, 0.75);
+    color: #222;
+    transition: all 0.2s cubic-bezier(.4,0,.2,1);
+}
+
+@media (max-width: 600px) {
+  .main-container {
+    width: 100vw;
+    height: auto;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .button-container {
+    flex-wrap: wrap;
+    gap: 12px 8px;
+    padding: 0 8vw;
+    width: 100vw;
+    justify-content: center;
+  }
+  .action-button {
+    flex: 1 1 40vw;
+    min-width: 120px;
+    max-width: 100%;
+  }
+}
+
+.centered-image.shrink {
+    transition: transform 0.5s cubic-bezier(.4,0,.2,1);
+    transform: translate(-50%, -50%) scale(0.5);
+}
+
+#button-container.fade-blur {
+    transition: filter 0.4s cubic-bezier(.4,0,.2,1), opacity 0.4s cubic-bezier(.4,0,.2,1);
+    filter: blur(12px);
+    opacity: 0;
+}
+
+.texture-overlay.fade-out {
+    opacity: 0;
+}

@@ -1,0 +1,199 @@
+@font-face {
+    font-family: 'Arizona';
+    src: url('type/arizona-bold.otf') format('opentype');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Arizona';
+    src: url('type/arizona-regular.otf') format('opentype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Arizona';
+    src: url('type/arizona-medium.otf') format('opentype');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Monument';
+    src: url('type/monument-regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: black;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    color: white;
+    position: relative;
+}
+
+.centered-image {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    overflow: hidden;
+    z-index: 9999;
+}
+
+.centered-image img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+
+.top-text {
+    text-align: center;
+    padding: 20px;
+    font-size: 1.2rem;
+    position: relative;
+    z-index: 10;
+    font-family: 'Arizona', serif;
+    font-weight: bold;
+    letter-spacing: 0.15em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+.menu-bar {
+    display: flex;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    padding: 20px 32px 0 32px;
+    z-index: 100;
+    justify-content: space-between;
+}
+
+.menu-bar .top-text {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.2rem;
+    font-family: 'Arizona', serif;
+    font-weight: bold;
+    letter-spacing: 0.15em;
+    color: white;
+    padding: 0;
+    margin: 0;
+    white-space: nowrap;
+}
+
+.menu-bar .get-started {
+    margin-left: auto;
+}
+
+.menu-buttons {
+    display: flex;
+    gap: 12px;
+    flex: 1 1 auto;
+}
+
+.action-button {
+    width: 120px;
+    padding: 6px;
+    background: rgba(173, 173, 173, 0.50);
+    backdrop-filter: blur(10px);
+    border: none;
+    border-radius: 6px;
+    color: #ffffff;
+    font-size: 0.9rem;
+    letter-spacing: 0.01em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Monument', sans-serif;
+    font-weight: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    flex-shrink: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    filter: blur(20px);
+    opacity: 0;
+    animation: unblur 0.5s ease 0.5s forwards;
+    text-decoration: none;
+    text-align: center;
+}
+
+@keyframes unblur {
+    from {
+        filter: blur(20px);
+        opacity: 0;
+    }
+    to {
+        filter: blur(0px);
+        opacity: 1;
+    }
+}
+
+.action-button:hover {
+    background: rgba(173, 173, 173, 0.70);
+    transition: all 0.3s ease;
+}
+
+.action-button:active {
+    transform: scale(0.96);
+    background: rgba(255, 255, 255, 0.75);
+    color: #222;
+    transition: all 0.2s cubic-bezier(.4,0,.2,1);
+}
+
+.intro-text {
+    margin-top: 200px;
+    margin-left: 32px;
+    margin-right: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+    width: 75%;
+    margin-bottom: 100px;
+    opacity: 0;
+    animation: fadeIn 1s ease 0.5s forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+h1 {
+    font-family: 'Arizona', serif;
+    font-weight: 400;
+    font-size: 48px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+h2 {
+    font-family: 'Arizona', serif;
+    font-weight: 400;
+    font-size: 48px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    color: #969696;
+} 
