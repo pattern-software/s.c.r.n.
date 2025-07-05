@@ -102,11 +102,15 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Close nav after clicking any option
     Array.from(mobileNavOptions.querySelectorAll('.action-button')).forEach(function(btn) {
-      btn.addEventListener('click', function() {
+      btn.addEventListener('click', function(e) {
+        // Don't prevent default - let the link navigate
         mobileNavOptions.classList.remove('open');
+        // The href will handle navigation automatically
       });
-      btn.addEventListener('touchstart', function() {
+      btn.addEventListener('touchstart', function(e) {
+        // Don't prevent default - let the link navigate
         mobileNavOptions.classList.remove('open');
+        // The href will handle navigation automatically
       });
     });
     // CONTACT button scroll or alert
