@@ -92,25 +92,17 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
     
-    mobileNavOptions.addEventListener('click', function(e) {
-      e.stopPropagation();
-    });
-    
-    mobileNavOptions.addEventListener('touchstart', function(e) {
-      e.stopPropagation();
-    });
-    
     // Close nav after clicking any option
     Array.from(mobileNavOptions.querySelectorAll('.action-button')).forEach(function(btn) {
       btn.addEventListener('click', function(e) {
-        // Don't prevent default - let the link navigate
+        console.log('Mobile nav button clicked:', btn.textContent, btn.href);
         mobileNavOptions.classList.remove('open');
-        // The href will handle navigation automatically
+        // Let the default link behavior work
       });
       btn.addEventListener('touchstart', function(e) {
-        // Don't prevent default - let the link navigate
+        console.log('Mobile nav button touched:', btn.textContent, btn.href);
         mobileNavOptions.classList.remove('open');
-        // The href will handle navigation automatically
+        // Let the default link behavior work
       });
     });
     // CONTACT button scroll or alert
