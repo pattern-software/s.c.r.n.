@@ -1,7 +1,8 @@
 document.addEventListener('DOMContentLoaded', function() {
-  var designBtn = Array.from(document.querySelectorAll('.action-button')).find(btn => btn.textContent.trim() === 'DESIGN');
-  var growthBtn = Array.from(document.querySelectorAll('.action-button')).find(btn => btn.textContent.trim() === 'GROWTH');
-  var teamBtn = Array.from(document.querySelectorAll('.action-button')).find(btn => btn.textContent.trim() === 'TEAM');
+  // Only target desktop navigation buttons (not mobile)
+  var designBtn = Array.from(document.querySelectorAll('.menu-buttons .action-button')).find(btn => btn.textContent.trim() === 'DESIGN');
+  var growthBtn = Array.from(document.querySelectorAll('.menu-buttons .action-button')).find(btn => btn.textContent.trim() === 'GROWTH');
+  var teamBtn = Array.from(document.querySelectorAll('.menu-buttons .action-button')).find(btn => btn.textContent.trim() === 'TEAM');
   var centeredImage = document.getElementById('centered-image');
   var buttonContainer = document.getElementById('button-container');
   var textureOverlay = document.querySelector('.texture-overlay');
