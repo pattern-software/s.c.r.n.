@@ -1,0 +1,102 @@
+body {
+    background-color: black;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    color: white;
+    position: relative;
+}
+
+/* Shared content styles for growth, design, and team pages */
+
+.centered-image {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    overflow: hidden;
+    z-index: 9999;
+}
+
+.centered-image img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+
+.intro-text {
+    margin-top: 200px;
+    margin-left: 32px;
+    margin-right: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 50%;
+    margin-bottom: 100px;
+    opacity: 0;
+    animation: fadeIn 1s ease 0.5s forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+h1 {
+    font-family: 'Arizona', serif;
+    font-weight: 400;
+    font-size: 32px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+h2 {
+    font-family: 'Arizona', serif;
+    font-weight: 400;
+    font-size: 32px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    color: #969696;
+} 
+
+/* --- MOBILE NAVIGATION --- */
+@media (max-width: 800px) {
+
+    h1 {
+        font-family: 'Arizona', serif;
+        font-weight: 400;
+        font-size: 24px;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
+    }
+    
+    h2 {
+        font-family: 'Arizona', serif;
+        font-weight: 400;
+        font-size: 24px;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
+        color: #969696;
+    } 
+
+    .intro-text {
+        margin-top: 200px;
+        margin-left: 32px;
+        margin-right: 32px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        width: 90%;
+        margin-bottom: 100px;
+        opacity: 0;
+        animation: fadeIn 1s ease 0.5s forwards;
+    }
+}

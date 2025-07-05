@@ -1,0 +1,328 @@
+@font-face {
+    font-family: 'Arizona';
+    src: url('type/arizona-bold.otf') format('opentype');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Arizona';
+    src: url('type/arizona-regular.otf') format('opentype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Arizona';
+    src: url('type/arizona-medium.otf') format('opentype');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Monument';
+    src: url('type/monument-regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Monument';
+    src: url('type/monument-light.otf') format('opentype');
+    font-weight: 300;
+    font-style: normal;
+}
+
+.menu-bar {
+    display: flex;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 32px 0 32px;
+    z-index: 100;
+    justify-content: space-between;
+    box-sizing: border-box;
+}
+
+.menu-bar .top-text {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.2rem;
+    font-family: 'Arizona', serif;
+    font-weight: bold;
+    letter-spacing: 0.15em;
+    color: white;
+    padding: 0;
+    margin: 0;
+    white-space: nowrap;
+    z-index: 10;
+}
+
+.menu-bar .get-started {
+    margin-left: auto;
+}
+
+.menu-buttons {
+    display: flex;
+    gap: 12px;
+    flex: 1 1 auto;
+}
+
+.action-button {
+    width: 120px;
+    padding: 6px;
+    background: rgba(173, 173, 173, 0.50);
+    backdrop-filter: blur(10px);
+    border: none;
+    border-radius: 6px;
+    color: #ffffff;
+    font-size: 0.9rem;
+    letter-spacing: 0.01em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Monument', sans-serif;
+    font-weight: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    flex-shrink: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    filter: blur(20px);
+    opacity: 0;
+    animation: unblur 0.5s ease 0.5s forwards;
+    text-decoration: none;
+    text-align: center;
+}
+
+.action-button:hover {
+  background: rgba(173, 173, 173, 0.70);
+  transition: all 0.3s ease;
+}
+
+.action-button:active {
+  transform: scale(0.96);
+  background: rgba(255, 255, 255, 0.75);
+  color: #222;
+  transition: all 0.2s cubic-bezier(.4,0,.2,1);
+}
+
+@keyframes unblur {
+    from {
+        filter: blur(20px);
+        opacity: 0;
+    }
+    to {
+        filter: blur(0px);
+        opacity: 1;
+    }
+}
+
+
+
+
+
+
+/* --- MOBILE NAVIGATION --- */
+@media (max-width: 1024px) {
+
+
+  .menu-bar {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 12px 0px 12px;
+    height: 60px;
+  }
+  .nav-left {
+    display: none !important;
+  }
+  .nav-left-mobile {
+    display: flex;
+    align-items: center;
+    z-index: 2;
+  }
+  .nav-center-mobile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    z-index: 2;
+  }
+  .nav-center-mobile .logo {
+    font-size: 1.2rem;
+    color: white;
+    font-family: 'Arizona', serif;
+    font-weight: bold;
+    letter-spacing: 0.15em;
+    margin: 0;
+    padding: 0;
+  }
+  .nav-right-mobile {
+    display: flex;
+    align-items: center;
+    z-index: 2;
+  }
+  .nav-current {
+    width: 110px;
+    height: 36px;
+    font-size: 2rem;
+    background: rgba(173, 173, 173, 0.50);
+    border-radius: 6px;
+    position: relative;
+    z-index: 2;
+    padding: 0;
+    line-height: 26px;
+    font-family: 'Monument', sans-serif;
+    font-weight: 300;
+    transition: all 0.3s ease;
+  }
+  .get-started-mobile {
+    width: 120px;
+    height: 36px;
+    font-size: 0.9rem;
+    background: rgba(173, 173, 173, 0.50);
+    border-radius: 6px;
+    position: relative;
+    z-index: 2;
+    padding: 0;
+    filter: none !important;
+    opacity: 1 !important;
+    animation: none !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    transition: all 0.3s ease;
+
+  }
+  .mobile-nav-options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 8px;
+    width: 110px;
+    position: absolute;
+    left: 12px;
+    top: 100%;
+    overflow: visible;
+    max-height: 0;
+    opacity: 0;
+    pointer-events: none;
+    transition: max-height 0.35s cubic-bezier(.4,0,.2,1), opacity 0.25s cubic-bezier(.4,0,.2,1);
+    z-index: 1000;
+    border-radius: 6px;
+  }
+  .mobile-nav-options.open {
+    max-height: 500px;
+    opacity: 1;
+    pointer-events: auto;
+    transition: max-height 0.35s cubic-bezier(.4,0,.2,1), opacity 0.25s cubic-bezier(.4,0,.2,1);
+  }
+  .mobile-nav-options .action-button {
+    width: 110px;
+    height: 36px;
+    border-radius: 6px;
+    background: rgba(173, 173, 173, 0.50);
+    font-size: 0.9rem;
+    filter: none;
+    opacity: 1;
+    animation: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    color: #fff;
+    transition: background 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    transition: all 0.3s ease;
+  }
+  .mobile-nav-options .action-button:hover {
+    background: rgba(173, 173, 173, 0.70);
+    color: #ffffff;
+    transition: all 0.3s ease;
+
+  }
+  .menu-buttons, .get-started {
+    display: none !important;
+  }
+}
+
+/* Hide mobile nav on desktop */
+@media (min-width: 1025px) {
+  .nav-left-mobile {
+    display: none !important;
+  }
+  .nav-center-mobile {
+    display: none !important;
+  }
+  .nav-right-mobile {
+    display: none !important;
+  }
+  .nav-current {
+    display: none !important;
+  }
+  .get-started-mobile {
+    display: none !important;
+  }
+  .mobile-nav-options {
+    display: none !important;
+    max-height: none;
+    opacity: 1;
+    pointer-events: auto;
+    position: static;
+    width: auto;
+    box-shadow: none;
+    background: none;
+    border-radius: 0;
+    transition: none;
+  }
+
+  .nav-left {
+    display: block !important;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.2rem;
+    font-family: 'Arizona', serif;
+    font-weight: bold;
+    letter-spacing: 0.15em;
+    color: white;
+    padding: 0;
+    margin: 0;
+    white-space: nowrap;
+    z-index: 10;
+  }
+  .menu-buttons, .get-started {
+    display: flex !important;
+  }
+  .menu-bar .get-started {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+}
+
+/* Remove appear animation for nav buttons on viewport change */
+@media (max-width: 1024px), (min-width: 1025px) {
+  .menu-bar .action-button, .nav-current, .mobile-nav-options .action-button {
+    filter: none !important;
+    opacity: 1 !important;
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .action-button, .nav-current, .mobile-nav-options .action-button {
+    animation: none !important;
+    transition: none !important;
+  }
+} 
