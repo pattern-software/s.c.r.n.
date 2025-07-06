@@ -1,72 +1,79 @@
 document.addEventListener('DOMContentLoaded', function() {
-  // Only target desktop navigation buttons (not mobile)
-  var designBtn = Array.from(document.querySelectorAll('.menu-buttons .action-button')).find(btn => btn.textContent.trim() === 'DESIGN');
-  var growthBtn = Array.from(document.querySelectorAll('.menu-buttons .action-button')).find(btn => btn.textContent.trim() === 'GROWTH');
-  var teamBtn = Array.from(document.querySelectorAll('.menu-buttons .action-button')).find(btn => btn.textContent.trim() === 'TEAM');
+  // Handle both landing page (index.html) and other pages
+  var buttonContainer = document.querySelector('.button-container') || document.querySelector('.menu-buttons');
   var centeredImage = document.getElementById('centered-image');
-  var buttonContainer = document.getElementById('button-container');
   var textureOverlay = document.querySelector('.texture-overlay');
+
+  // Find buttons in either container
+  var designBtn = Array.from(document.querySelectorAll('.action-button')).find(btn => btn.textContent.trim() === 'DESIGN');
+  var growthBtn = Array.from(document.querySelectorAll('.action-button')).find(btn => btn.textContent.trim() === 'GROWTH');
+  var teamBtn = Array.from(document.querySelectorAll('.action-button')).find(btn => btn.textContent.trim() === 'TEAM');
+  var contactBtn = Array.from(document.querySelectorAll('.action-button')).find(btn => btn.textContent.trim() === 'CONTACT');
 
   console.log('Found design button:', designBtn);
   console.log('Found growth button:', growthBtn);
+  console.log('Found team button:', teamBtn);
+  console.log('Found contact button:', contactBtn);
 
-  if (designBtn && centeredImage && buttonContainer && textureOverlay) {
-    designBtn.addEventListener('click', function(e) {
+  // Helper function to handle button interactions with proper mobile support
+  function setupButtonInteraction(button, targetPage) {
+    if (!button) return;
+    
+    function handleInteraction(e) {
       e.preventDefault();
       e.stopPropagation();
-      console.log('Design button clicked');
-      // Animate
-      centeredImage.classList.add('shrink');
-      buttonContainer.classList.add('fade-blur');
-      textureOverlay.classList.add('fade-out');
-      // After animation, navigate
-      setTimeout(function() {
-        window.location.href = 'design.html';
-      }, 500); // match CSS transition duration
-    });
+      console.log(button.textContent + ' button clicked/touched');
+      
+      // Animate if we have the elements
+      if (centeredImage && buttonContainer && textureOverlay) {
+        centeredImage.classList.add('shrink');
+        buttonContainer.classList.add('fade-blur');
+        textureOverlay.classList.add('fade-out');
+        // After animation, navigate
+        setTimeout(function() {
+          window.location.href = targetPage;
+        }, 500); // match CSS transition duration
+      } else {
+        // Direct navigation if no animation elements
+        window.location.href = targetPage;
+      }
+    }
+    
+    // Add both click and touch events for mobile compatibility
+    button.addEventListener('click', handleInteraction);
+    button.addEventListener('touchstart', handleInteraction, { passive: false });
   }
 
-  if (growthBtn && centeredImage && buttonContainer && textureOverlay) {
-    growthBtn.addEventListener('click', function(e) {
-      e.preventDefault();
-      e.stopPropagation();
-      console.log('Growth button clicked');
-      // Animate
-      centeredImage.classList.add('shrink');
-      buttonContainer.classList.add('fade-blur');
-      textureOverlay.classList.add('fade-out');
-      // After animation, navigate
-      setTimeout(function() {
-        window.location.href = 'growth.html';
-      }, 500); // match CSS transition duration
-    });
+  // Setup button interactions
+  if (designBtn) {
+    setupButtonInteraction(designBtn, 'design.html');
   }
 
-  if (teamBtn && centeredImage && buttonContainer && textureOverlay) {
-    teamBtn.addEventListener('click', function(e) {
-      e.preventDefault();
-      e.stopPropagation();
-      console.log('Team button clicked');
-      // Animate
-      centeredImage.classList.add('shrink');
-      buttonContainer.classList.add('fade-blur');
-      textureOverlay.classList.add('fade-out');
-      // After animation, navigate
-      setTimeout(function() {
-        window.location.href = 'team.html';
-      }, 500); // match CSS transition duration
-    });
+  if (growthBtn) {
+    setupButtonInteraction(growthBtn, 'growth.html');
   }
 
+  if (teamBtn) {
+    setupButtonInteraction(teamBtn, 'team.html');
+  }
+
+  if (contactBtn) {
+    setupButtonInteraction(contactBtn, 'mailto:brad@scrn.co');
+  }
+
+  // Show texture overlay
   if (textureOverlay) {
     setTimeout(function() {
       textureOverlay.classList.add('show');
     }, 10);
   }
 
-  // Mobile nav expand/collapse
+  // Mobile nav expand/collapse (only for pages that have it)
   var navToggle = document.getElementById('nav-toggle');
   var mobileNavOptions = document.getElementById('mobile-nav-options');
+  console.log('Nav toggle found:', navToggle);
+  console.log('Mobile nav options found:', mobileNavOptions);
+  
   if (navToggle && mobileNavOptions) {
     // Handle both click and touch events for mobile compatibility
     function toggleNav(e) {
@@ -77,7 +84,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     navToggle.addEventListener('click', toggleNav);
-    navToggle.addEventListener('touchstart', toggleNav);
+    navToggle.addEventListener('touchstart', toggleNav, { passive: false });
     
     // Close dropdown when clicking outside
     document.addEventListener('click', function(e) {
@@ -94,22 +101,26 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     // Close nav after clicking any option
-    Array.from(mobileNavOptions.querySelectorAll('.action-button')).forEach(function(btn) {
-      btn.addEventListener('click', function(e) {
-        console.log('Mobile nav button clicked:', btn.textContent, btn.href);
+    var mobileButtons = mobileNavOptions.querySelectorAll('.action-button');
+    console.log('Mobile buttons found:', mobileButtons.length);
+    
+    Array.from(mobileButtons).forEach(function(btn, index) {
+      console.log('Setting up mobile button', index, ':', btn.textContent, btn.href);
+      
+      function handleMobileButton(e) {
+        console.log('Mobile nav button clicked/touched:', btn.textContent, btn.href);
         mobileNavOptions.classList.remove('open');
         // Let the default link behavior work
-      });
-      btn.addEventListener('touchstart', function(e) {
-        console.log('Mobile nav button touched:', btn.textContent, btn.href);
-        mobileNavOptions.classList.remove('open');
-        // Let the default link behavior work
-      });
+      }
+      
+      btn.addEventListener('click', handleMobileButton);
+      btn.addEventListener('touchstart', handleMobileButton, { passive: false });
     });
+    
     // CONTACT button scroll or alert
     var contactBtn = document.getElementById('contact-mobile');
     if (contactBtn) {
-      contactBtn.addEventListener('click', function(e) {
+      function handleContact(e) {
         e.preventDefault();
         var contactSection = document.getElementById('contact');
         if (contactSection) {
@@ -117,7 +128,10 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
           alert('Contact section coming soon!');
         }
-      });
+      }
+      
+      contactBtn.addEventListener('click', handleContact);
+      contactBtn.addEventListener('touchstart', handleContact, { passive: false });
     }
   }
 }); 
