@@ -76,71 +76,25 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 10);
   }
 
-  // Mobile nav expand/collapse (only for pages that have it)
-  var navToggle = document.getElementById('nav-toggle');
-  var mobileNavOptions = document.getElementById('mobile-nav-options');
-  console.log('Nav toggle found:', navToggle);
-  console.log('Mobile nav options found:', mobileNavOptions);
+  // Mobile bottom navigation setup (for pages that have it)
+  var mobileBottomNav = document.querySelector('.mobile-bottom-nav');
+  console.log('Mobile bottom nav found:', mobileBottomNav);
   
-  if (navToggle && mobileNavOptions) {
-    // Handle both click and touch events for mobile compatibility
-    function toggleNav(e) {
-      e.preventDefault();
-      e.stopPropagation();
-      console.log('Nav toggle clicked/touched');
-      mobileNavOptions.classList.toggle('open');
-    }
+  if (mobileBottomNav) {
+    var mobileBottomButtons = mobileBottomNav.querySelectorAll('.action-button');
+    console.log('Mobile bottom buttons found:', mobileBottomButtons.length);
     
-    navToggle.addEventListener('click', toggleNav);
-    navToggle.addEventListener('touchstart', toggleNav, { passive: false });
-    
-    // Close dropdown when clicking outside
-    document.addEventListener('click', function(e) {
-      if (mobileNavOptions.classList.contains('open') && !navToggle.contains(e.target)) {
-        mobileNavOptions.classList.remove('open');
-      }
-    });
-    
-    // Close dropdown when touching outside (mobile)
-    document.addEventListener('touchstart', function(e) {
-      if (mobileNavOptions.classList.contains('open') && !navToggle.contains(e.target)) {
-        mobileNavOptions.classList.remove('open');
-      }
-    });
-    
-    // Close nav after clicking any option
-    var mobileButtons = mobileNavOptions.querySelectorAll('.action-button');
-    console.log('Mobile buttons found:', mobileButtons.length);
-    
-    Array.from(mobileButtons).forEach(function(btn, index) {
-      console.log('Setting up mobile button', index, ':', btn.textContent, btn.href);
+    Array.from(mobileBottomButtons).forEach(function(btn, index) {
+      console.log('Setting up mobile bottom button', index, ':', btn.textContent, btn.href);
       
-      function handleMobileButton(e) {
-        console.log('Mobile nav button clicked/touched:', btn.textContent, btn.href);
-        mobileNavOptions.classList.remove('open');
+      function handleMobileBottomButton(e) {
+        console.log('Mobile bottom nav button clicked/touched:', btn.textContent, btn.href);
         // Don't prevent default - let the natural link behavior work
         // The href attribute will handle navigation automatically
       }
       
-      btn.addEventListener('click', handleMobileButton);
-      btn.addEventListener('touchstart', handleMobileButton, { passive: true });
+      btn.addEventListener('click', handleMobileBottomButton);
+      btn.addEventListener('touchstart', handleMobileBottomButton, { passive: true });
     });
-    
-    // CONTACT button scroll or alert
-    var contactBtn = document.getElementById('contact-mobile');
-    if (contactBtn) {
-      function handleContact(e) {
-        e.preventDefault();
-        var contactSection = document.getElementById('contact');
-        if (contactSection) {
-          contactSection.scrollIntoView({ behavior: 'smooth' });
-        } else {
-          alert('Contact section coming soon!');
-        }
-      }
-      
-      contactBtn.addEventListener('click', handleContact);
-      contactBtn.addEventListener('touchstart', handleContact, { passive: false });
-    }
   }
 }); 
