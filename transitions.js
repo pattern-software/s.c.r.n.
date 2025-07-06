@@ -4,16 +4,24 @@ document.addEventListener('DOMContentLoaded', function() {
   var centeredImage = document.getElementById('centered-image');
   var textureOverlay = document.querySelector('.texture-overlay');
 
-  // Find buttons in either container
-  var designBtn = Array.from(document.querySelectorAll('.action-button')).find(btn => btn.textContent.trim() === 'DESIGN');
-  var growthBtn = Array.from(document.querySelectorAll('.action-button')).find(btn => btn.textContent.trim() === 'GROWTH');
-  var teamBtn = Array.from(document.querySelectorAll('.action-button')).find(btn => btn.textContent.trim() === 'TEAM');
-  var contactBtn = Array.from(document.querySelectorAll('.action-button')).find(btn => btn.textContent.trim() === 'CONTACT');
+  // Find buttons in either container (but exclude mobile dropdown buttons)
+  var allButtons = Array.from(document.querySelectorAll('.action-button'));
+  var mobileDropdownButtons = Array.from(document.querySelectorAll('.mobile-nav-options .action-button'));
+  
+  // Filter out mobile dropdown buttons from the main button selection
+  var mainButtons = allButtons.filter(btn => !mobileDropdownButtons.includes(btn));
+  
+  var designBtn = mainButtons.find(btn => btn.textContent.trim() === 'DESIGN');
+  var growthBtn = mainButtons.find(btn => btn.textContent.trim() === 'GROWTH');
+  var teamBtn = mainButtons.find(btn => btn.textContent.trim() === 'TEAM');
+  var contactBtn = mainButtons.find(btn => btn.textContent.trim() === 'CONTACT');
 
   console.log('Found design button:', designBtn);
   console.log('Found growth button:', growthBtn);
   console.log('Found team button:', teamBtn);
   console.log('Found contact button:', contactBtn);
+  console.log('Mobile dropdown buttons found:', mobileDropdownButtons.length);
+  console.log('Main buttons found:', mainButtons.length);
 
   // Helper function to handle button interactions with proper mobile support
   function setupButtonInteraction(button, targetPage) {
@@ -110,11 +118,12 @@ document.addEventListener('DOMContentLoaded', function() {
       function handleMobileButton(e) {
         console.log('Mobile nav button clicked/touched:', btn.textContent, btn.href);
         mobileNavOptions.classList.remove('open');
-        // Let the default link behavior work
+        // Don't prevent default - let the natural link behavior work
+        // The href attribute will handle navigation automatically
       }
       
       btn.addEventListener('click', handleMobileButton);
-      btn.addEventListener('touchstart', handleMobileButton, { passive: false });
+      btn.addEventListener('touchstart', handleMobileButton, { passive: true });
     });
     
     // CONTACT button scroll or alert
